@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Robot Project</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 0; background: #f9f9f9; }
+        header { background: #333; color: #fff; padding: 20px 0; text-align: center; }
+        main { max-width: 900px; margin: 20px auto; padding: 0 20px; }
+        h1, h2 { color: #333; }
+        .project-section { margin-bottom: 30px; }
+        img { max-width: 100%; border: 1px solid #ccc; border-radius: 5px; }
+        a.button { display: inline-block; padding: 10px 15px; background: #333; color: #fff; text-decoration: none; border-radius: 5px; margin-top: 10px; }
+        a.button:hover { background: #555; }
+        ul { list-style-type: disc; padding-left: 20px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Trading Robot Project</h1>
+    </header>
+    <main>
+        <div class="project-section">
+            <h2>Description</h2>
+            <p>
+                This project is a Python-based trading robot that applies a "dip strategy" on stock data. 
+                It generates buy signals when the stock price drops 20% below the 365-day high, 
+                blocking new buys until the last maximum price is touched again. 
+                The bot performs a simple backtest using historical data from Yahoo Finance.
+            </p>
+        </div>
+
+        <div class="project-section">
+            <h2>Technologies Used</h2>
+            <ul>
+                <li>Python</li>
+                <li>pandas (data analysis)</li>
+                <li>yfinance (historical stock data)</li>
+                <li>matplotlib (visualization)</li>
+            </ul>
+        </div>
+
+        <div class="project-section">
+            <h2>Backtest Results Example</h2>
+            <p>Initial capital: $10,000</p>
+            <p>Final capital after strategy: $<span id="final-capital">12,345</span></p>
+            <p>Total profit: $<span id="profit">2,345</span></p>
+        </div>
+
+        <div class="project-section">
+            <h2>Trading Strategy Graph</h2>
+            <!-- Puedes reemplazar esta imagen con un screenshot de tu gráfico -->
+            <img src="screenshot.png" alt="Trading strategy graph">
+        </div>
+
+        <div class="project-section">
+            <h2>Project Code</h2>
+            <p>You can check the full Python code on <a href="https://github.com/sergioacostaval/Portfolio/tree/main/projects/trading-robot" target="_blank">GitHub</a>.</p>
+        </div>
+
+        <div class="project-section">
+            <a href="../index.html" class="button">Back to Portfolio</a>
+        </div>
+    </main>
+</body>
+</html>
