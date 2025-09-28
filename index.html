@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - Sergio Acosta</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Roboto Mono', monospace; }
+    .hero-bg {
+      position: relative;
+      overflow: hidden;
+      background-color: #0f172a; /* fondo oscuro */
+    }
+    #candles {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-gray-200">
+  <!-- Header -->
+  <header class="bg-gray-800 bg-opacity-80 shadow-md sticky top-0 backdrop-blur">
+    <div class="max-w-6xl mx-auto flex justify-between items-center p-4">
+      <h1 class="text-xl font-bold text-cyan-400">Sergio Acosta</h1>
+      <nav>
+        <a href="#projects" class="mx-3 hover:text-cyan-400">Projets</a>
+        <a href="#about" class="mx-3 hover:text-cyan-400">À propos</a>
+        <a href="#contact" class="mx-3 hover:text-cyan-400">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero-bg text-center py-24 text-white min-h-[60vh] flex items-center justify-center">
+    <canvas id="candles"></canvas>
+    <div class="hero-content">
+      <h2 class="text-4xl md:text-6xl font-extrabold">📊 Trading • 💻 Programmation • 📈 Data</h2>
+      <p class="mt-6 text-lg max-w-2xl mx-auto">
+        Bienvenue! Je suis passionné par l'analyse de données, la programmation et le trading algorithmique.
+        Découvrez mes projets et expériences dans ces domaines.
+      </p>
+      <a href="#projects" class="mt-8 inline-block bg-cyan-500 hover:bg-cyan-400 text-gray-900 font-bold py-3 px-6 rounded-xl transition">
+        Voir mes projets
+      </a>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="max-w-6xl mx-auto py-20">
+    <h3 class="text-3xl font-bold mb-10 text-center text-cyan-400">Mes Projets</h3>
+    <div class="grid md:grid-cols-3 gap-10">
+      <div class="bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:scale-105 transition">
+        <div class="p-6">
+          <h4 class="text-xl font-bold text-cyan-300">📈 Bot de Trading</h4>
+          <p class="mt-3 text-gray-400">Un robot de trading basé sur Python, utilisant des stratégies de backtesting et d'analyse technique.</p>
+          <a href="#" class="text-cyan-400 hover:underline mt-4 inline-block">Voir plus</a>
+        </div>
+      </div>
+      <div class="bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:scale-105 transition">
+        <div class="p-6">
+          <h4 class="text-xl font-bold text-cyan-300">💻 Application Web</h4>
+          <p class="mt-3 text-gray-400">Site web interactif développé en Flask, intégrant des opérations CRUD et une base de données SQLite.</p>
+          <a href="#" class="text-cyan-400 hover:underline mt-4 inline-block">Voir plus</a>
+        </div>
+      </div>
+      <div class="bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:scale-105 transition">
+        <div class="p-6">
+          <h4 class="text-xl font-bold text-cyan-300">📊 Analyse de Données</h4>
+          <p class="mt-3 text-gray-400">Projet de visualisation des données financières avec Python, pandas et matplotlib.</p>
+          <a href="#" class="text-cyan-400 hover:underline mt-4 inline-block">Voir plus</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="bg-gray-800 py-20">
+    <div class="max-w-4xl mx-auto text-center">
+      <h3 class="text-3xl font-bold mb-6 text-cyan-400">À propos de moi</h3>
+      <p class="text-gray-300 leading-relaxed">
+        Je suis Sergio Andrés Acosta Valbuena, ingénieur avec 10 ans d'expérience en gestion de projets d'automatisation.
+        Aujourd'hui, je me spécialise en programmation, en analyse de données et en trading algorithmique.
+        Mon objectif est de combiner ces compétences pour développer des solutions technologiques innovantes.
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="max-w-4xl mx-auto py-20 text-center">
+    <h3 class="text-3xl font-bold mb-6 text-cyan-400">Contact</h3>
+    <p>📧 <a href="mailto:tuemail@gmail.com" class="text-cyan-400 hover:underline">tuemail@gmail.com</a></p>
+    <p class="mt-2">🔗 <a href="https://linkedin.com" class="text-cyan-400 hover:underline">LinkedIn</a> | <a href="https://github.com" class="text-cyan-400 hover:underline">GitHub</a></p>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-950 text-gray-400 py-6 text-center">
+    <p>&copy; 2025 Sergio Acosta - Tous droits réservés</p>
+  </footer>
+
+  <!-- Script velas animadas -->
+  <script>
+    const canvas = document.getElementById("candles");
+    const ctx = canvas.getContext("2d");
+    let width, height;
+
+    function resizeCanvas() {
+      width = canvas.width = canvas.offsetWidth;
+      height = canvas.height = canvas.offsetHeight;
+    }
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    class Candle {
+      constructor(x) {
+        this.x = x;
+        this.reset();
+      }
+
+      reset() {
+        this.open = Math.random() * height * 0.5 + height * 0.25;
+        this.close = this.open + (Math.random() - 0.5) * 60;
+        this.high = Math.max(this.open, this.close) + Math.random() * 20;
+        this.low = Math.min(this.open, this.close) - Math.random() * 20;
+        this.color = this.close >= this.open ? "#22c55e" : "#ef4444";
+        this.width = 10 + Math.random() * 5;
+        this.speed = 1 + Math.random() * 2;
+      }
+
+      update() {
+        this.x -= this.speed;
+        if (this.x + this.width < 0) {
+          this.x = width + Math.random() * 50;
+          this.reset();
+        }
+      }
+
+      draw(ctx) {
+        ctx.strokeStyle = this.color;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(this.x, this.high);
+        ctx.lineTo(this.x, this.low);
+        ctx.stroke();
+        ctx.fillStyle = this.color;
+        ctx.fillRect(this.x - this.width / 2, Math.min(this.open, this.close), this.width, Math.abs(this.open - this.close));
+      }
+    }
+
+    let candles = [];
+    function initCandles() {
+      candles = [];
+      const candleCount = Math.floor(width / 30);
+      for (let i = 0; i < candleCount; i++) {
+        candles.push(new Candle(i * 30));
+      }
+    }
+    initCandles();
+    window.addEventListener("resize", initCandles);
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      candles.forEach(c => {
+        c.update();
+        c.draw(ctx);
+      });
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+</body>
+</html>
