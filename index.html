@@ -13,10 +13,11 @@
       overflow: hidden;
       background-color: #0f172a; /* fondo oscuro */
     }
-    #candles {
+    #matrixCanvas {
       position: absolute;
       top: 0; left: 0;
-      width: 100%; height: 100%;
+      width: 100%;
+      height: 100%;
       z-index: 0;
     }
     .hero-content {
@@ -40,7 +41,7 @@
 
   <!-- Hero -->
   <section class="hero-bg text-center py-24 text-white min-h-[60vh] flex items-center justify-center">
-    <canvas id="candles"></canvas>
+    <canvas id="matrixCanvas"></canvas>
     <div class="hero-content">
       <h2 class="text-4xl md:text-6xl font-extrabold">📊 Trading • 💻 Programmation • 📈 Data</h2>
       <p class="mt-6 text-lg max-w-2xl mx-auto">
@@ -106,22 +107,20 @@
 
   <!-- Script efecto Matrix -->
   <script>
-    const canvas = document.getElementById("candles");
+    const canvas = document.getElementById("matrixCanvas");
     const ctx = canvas.getContext("2d");
     let width, height;
 
+    const letters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const fontSize = 18;
+    let columns = [];
+    let drops = [];
+
     function resizeCanvas() {
-      width = canvas.width = canvas.offsetWidth;
-      height = canvas.height = canvas.offsetHeight;
+      width = canvas.width = canvas.parentElement.clientWidth;
+      height = canvas.height = canvas.parentElement.clientHeight;
       initMatrix();
     }
-    window.addEventListener("resize", resizeCanvas);
-    resizeCanvas();
-
-    const letters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const fontSize = 18; // un poco más grande para visibilidad
-    let columns;
-    let drops;
 
     function initMatrix() {
       columns = Math.floor(width / fontSize);
@@ -131,15 +130,18 @@
       }
     }
 
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
     function drawMatrix() {
-      // Fondo semi-transparente para efecto "trail"
-      ctx.fillStyle = "rgba(0, 0, 0, 0.06)";
+      // Fondo negro semi-transparente para efecto trail
+      ctx.fillStyle = "rgba(0, 0, 0, 0.08)";
       ctx.fillRect(0, 0, width, height);
 
       // Crear gradiente verde
       const gradient = ctx.createLinearGradient(0, 0, 0, height);
-      gradient.addColorStop(0, "#0F0");
-      gradient.addColorStop(1, "#00FF00AA");
+      gradient.addColorStop(0, "#00FF00");
+      gradient.addColorStop(1, "#0F0AA");
       ctx.fillStyle = gradient;
       ctx.font = fontSize + "px monospace";
 
@@ -147,8 +149,8 @@
         const text = letters.charAt(Math.floor(Math.random() * letters.length));
         ctx.fillText(text, i * fontSize, drops[i]);
 
-        if(drops[i] > height && Math.random() > 0.975)
-          drops[i] = 0;
+        // Reinicia la columna si llega al final
+        if(drops[i] > height && Math.random() > 0.975) drops[i] = 0;
 
         drops[i] += fontSize * 0.6; // velocidad más suave
       }
@@ -158,6 +160,7 @@
       drawMatrix();
       requestAnimationFrame(animate);
     }
+
     animate();
   </script>
 </body>
